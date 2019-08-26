@@ -1,0 +1,137 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5
+Server version: 5.5.61 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| swapdata           |
+| test               |
+| vinudata           |
+| vita               |
++--------------------+
+7 rows in set (0.08 sec)
+
+mysql> CREATE DATABASE AdventureWorks;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASES
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| mysql              |
+| performance_schema |
+| swapdata           |
+| test               |
+| vinudata           |
+| vita               |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> USE AdventureWorks;
+Database changed
+mysql> CREATE TABLE ProductCategory
+    -> (
+    -> ProductCategoryID int,
+    -> Name varchar(20)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> INSERT INTO ProductCategory VALUES( 1, 'Bikes');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO ProductCategory VALUES( 2, 'Cars');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO ProductCategory VALUES( 3, 'Accessories');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO ProductCategory VALUES( 4, 'Clothing');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO ProductCategory VALUES( 5, 'Bombs');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SHOW ProductCategory
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ProductCategory' at line 1
+mysql> SHOW TABLE ProductCategory;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ProductCategory' at line 1
+mysql> SELECT * FROM ProductCategory;
++-------------------+-------------+
+| ProductCategoryID | Name        |
++-------------------+-------------+
+|                 1 | Bikes       |
+|                 2 | Cars        |
+|                 3 | Accessories |
+|                 4 | Clothing    |
+|                 5 | Bombs       |
++-------------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> UPDATE ProductCategory
+    -> SET Name = 'SUVs'
+    -> WHERE ProductCategoryID = 5
+    -> ;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM ProductCategory;
++-------------------+-------------+
+| ProductCategoryID | Name        |
++-------------------+-------------+
+|                 1 | Bikes       |
+|                 2 | Cars        |
+|                 3 | Accessories |
+|                 4 | Clothing    |
+|                 5 | SUVs        |
++-------------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM ProductCategory
+    -> WHERE ProductCategoryID = 'SUVs';
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SELECT * FROM ProductCategory;
++-------------------+-------------+
+| ProductCategoryID | Name        |
++-------------------+-------------+
+|                 1 | Bikes       |
+|                 2 | Cars        |
+|                 3 | Accessories |
+|                 4 | Clothing    |
+|                 5 | SUVs        |
++-------------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM ProductCategory
+    -> WHERE ProductCategoryID = 3;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM ProductCategory;
++-------------------+----------+
+| ProductCategoryID | Name     |
++-------------------+----------+
+|                 1 | Bikes    |
+|                 2 | Cars     |
+|                 4 | Clothing |
+|                 5 | SUVs     |
++-------------------+----------+
+4 rows in set (0.00 sec)
